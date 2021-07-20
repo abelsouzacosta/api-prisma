@@ -4,8 +4,20 @@
   "main": "index.js",
   "author": "Abel Souza Costa Junior <abelsouzacosta@gmail.com>",
   "license": "MIT",
+  "scripts": {},
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },  
   "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "@types/node": "^16.3.3",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "3.3.0",
+    "husky": "4",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.3.5"
   },
@@ -14,5 +26,10 @@
     "@types/express": "^4.17.13",
     "cors": "^2.8.5",
     "express": "^4.17.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
