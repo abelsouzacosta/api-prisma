@@ -7,9 +7,19 @@ interface IUserRequest {
   username: string;
   password: string;
 }
+interface IUserResponse {
+  id: string;
+  name: string;
+  username: string;
+  password: string;
+}
 
 class RegisterUserService {
-  public async execute({ name, username, password }: IUserRequest) {
+  public async execute({
+    name,
+    username,
+    password,
+  }: IUserRequest): Promise<IUserResponse | undefined> {
     // verifica se o usuário já existe
     const userExists = await client.user.findFirst({
       where: {
