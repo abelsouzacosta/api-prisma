@@ -8,7 +8,7 @@ interface IUserRequest {
   password: string;
 }
 
-class AuthenticationService {
+class RegisterUserService {
   public async execute({ name, username, password }: IUserRequest) {
     // verifica se o usuário já existe
     const userExists = await client.user.findFirst({
@@ -35,4 +35,4 @@ class AuthenticationService {
   }
 }
 
-export { AuthenticationService };
+export { RegisterUserService };
