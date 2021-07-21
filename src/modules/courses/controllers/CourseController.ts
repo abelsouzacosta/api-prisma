@@ -1,8 +1,17 @@
 import { Request, Response } from 'express';
+import { ListCourseService } from '../services/ListCourseService';
 import { CreateCourseService } from '../services/CreateCourseService';
 import { UpdateCourseService } from '../services/UpdateCourseService';
 
 class CourseController {
+  public async index(request: Request, response: Response): Promise<Response> {
+    const list = new ListCourseService();
+
+    const courses = await list.execute();
+
+    return response.status(200).json(courses);
+  }
+
   public async create(request: Request, response: Response): Promise<Response> {
     const { name, description } = request.body;
 
