@@ -10,4 +10,6 @@ coursesRouter.post('/', controller.create);
 
 coursesRouter.put('/:id', controller.update);
 
+coursesRouter.delete('/:id', controller.delete);
+
 export default coursesRouter;

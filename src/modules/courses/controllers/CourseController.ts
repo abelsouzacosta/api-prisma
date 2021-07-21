@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { ListCourseService } from '../services/ListCourseService';
 import { CreateCourseService } from '../services/CreateCourseService';
 import { UpdateCourseService } from '../services/UpdateCourseService';
+import { DeleteCourseService } from '../services/DeleteCourseService';
 
 class CourseController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -31,6 +32,16 @@ class CourseController {
     const course = await update.execute({ id, name, description });
 
     return response.status(200).json(course);
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const delete_course = new DeleteCourseService();
+
+    await delete_course.execute({ id });
+
+    return response.status(200).json(true);
   }
 }
 
