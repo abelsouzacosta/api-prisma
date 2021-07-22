@@ -1,8 +1,12 @@
 import { Router } from 'express';
 import { CourseController } from '../controllers/CourseController';
 
+import isAuthenticated from '@middlewares/isAuthenticated';
+
 const coursesRouter = Router();
 const controller = new CourseController();
+
+coursesRouter.use(isAuthenticated);
 
 coursesRouter.get('/', controller.index);
 
