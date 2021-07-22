@@ -3,6 +3,7 @@ import ApplicationError from '@errors/ApplicationError';
 import { client } from '@client/client';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
+import { GenerateRefreshToken } from '@modules/authentication/providers/GenerateRefreshToken';
 
 interface IAuthenticateRequest {
   username: string;
@@ -14,9 +15,16 @@ interface IUser extends IAuthenticateRequest {
   name: string;
 }
 
+interface IRefreshToken {
+  id: string;
+  expiresIn: number;
+  userId: string;
+}
+
 interface IAuthenticateResponse {
   user: IUser;
   token: string;
+  refreshToken: IRefreshToken;
 }
 
 class AuthenticateUserService {
@@ -44,9 +52,17 @@ class AuthenticateUserService {
       expiresIn: '20s',
     });
 
+    const generateRefreshToken = new GenerateRefreshToken();
+
+    // gera um novo refresh token
+    const refreshToken = await generateRefreshToken.execute({
+      userId: user.id,
+    });
+
     return {
       user,
       token,
+      refreshToken,
     };
   }
 }

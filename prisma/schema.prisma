@@ -13,11 +13,11 @@ generator client {
 // definindo o modelo de usuário
 // o username do usuário é único
 model User {
-  id            String        @id @default(uuid())
+  id            String         @id @default(uuid())
   name          String
-  username      String        @unique
+  username      String         @unique
   password      String
-  refresh_token RefreshToken?
+  refresh_token RefreshToken[]
 
   @@map("Users")
 }
