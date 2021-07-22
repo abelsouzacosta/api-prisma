@@ -7,8 +7,14 @@ interface IRefreshToken {
   refresh_token: string;
 }
 
+interface IRefreshTokenResponse {
+  newToken: string;
+}
+
 class CreateRefreshToken {
-  public async execute({ refresh_token }: IRefreshToken) {
+  public async execute({
+    refresh_token,
+  }: IRefreshToken): Promise<IRefreshTokenResponse> {
     const refreshToken = await client.refreshToken.findFirst({
       where: {
         id: refresh_token,
